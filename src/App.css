@@ -2,8 +2,12 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  text-align: left;
 }
+
+/* li {
+  text-align: left;
+} */
 
 .logo {
   height: 6em;
@@ -45,11 +49,11 @@
   max-width: 800px;
   margin: auto;
   padding: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .header-bar {
-  background-color: #333;
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 10px 0;
   display: flex;
   justify-content: center;
@@ -63,16 +67,22 @@
 }
 
 .app-title {
+  font-size: 3em;
   color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .app-description {
   margin-top: 20px;
 }
 
-.account-section, .conversion-section {
+.account-section {
+  background: rgba(255, 255, 255, 0.1);
   margin: 20px 0;
-  padding: 20px 0;
+  padding: 20px;
   border: 1px solid grey;
   border-radius: 5px;
 }
@@ -82,30 +92,122 @@
   margin: 10px 0;
 }
 
-.login-button, .submit-button {
+.login-button {
   background-color: #007bff;
   color: white;
-  padding: 10px 20px;
-  border: none;
   border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #007bff;
+  color: white;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
 .login-button:hover, .submit-button:hover {
   background-color: #0056b3;
 }
 
+.details {
+  font-size: 1.8em;
+  border: 1px solid grey;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
 #chexBalance {
   display: inline-block;
   margin-left: 10px;
-}
 
-.conversion-input {
-  margin-top: 10px;
-  padding: 5px;
+  font-weight: bold;
+  margin-left: 10px;
 }
 
 .highlight {
-  color: #076307; /* This sets the $CHEX text to green */
+  color: #076307;
+}
+
+.conversion-section {
+  padding: 20px;
+  margin: 0 0 20px 0;
+  border: 1px solid grey;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+
+.conversion-input-group {
+  display: flex;
+  
+  position: relative;
+}
+
+/* .conversion-input {
+  margin-top: 10px;
+  margin-bottom: 1rem;
+  padding: 5px;
+
+  width: 100%;
+  
+  box-sizing: border-box;
+} */
+
+/* .conversion-input {
+  flex: 1;
+  margin-right: 1rem;
+} */
+
+/* .chex-label {
+  flex-basis: 50%;
+  text-align: left;
+  padding: 10px 0;
+  white-space: nowrap;
+} */
+
+
+.input-and-button-container {
+  display: flex;
+}
+
+.conversion-input-group {
+  position: relative;
+  display: flex;
+  flex: 1 1 50%; /* Take up half the width */
+}
+
+.conversion-input {
+  flex-grow: 1;
+  padding: 10px;
+  padding-right: 60px; /* Adjust based on the size of the $CHEX label */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.chex-label {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+
+.submit-button {
+  background-color: #007bff;
+  color: white;
+
+  flex: 1 1 50%; /* Take up half the width */
+  padding: 10px;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
