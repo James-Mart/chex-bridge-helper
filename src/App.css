@@ -1,0 +1,111 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.app-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.header-bar {
+  background-color: #333;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.logo {
+  height: 50px;
+  margin-right: 20px;
+}
+
+.app-title {
+  color: white;
+}
+
+.app-description {
+  margin-top: 20px;
+}
+
+.account-section, .conversion-section {
+  margin: 20px 0;
+  padding: 20px 0;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.account-label, .balance-label, .conversion-label {
+  display: block;
+  margin: 10px 0;
+}
+
+.login-button, .submit-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.login-button:hover, .submit-button:hover {
+  background-color: #0056b3;
+}
+
+#chexBalance {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.conversion-input {
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.highlight {
+  color: #076307; /* This sets the $CHEX text to green */
+}
