@@ -37,10 +37,11 @@ const contractKit = new ContractKit({
 
 function App() {
   
-  const [anchorSession, setAnchorSession] = useLocalStorageState<Session | null>('session', {
+  const [response, setResponse] = useLocalStorageState<string | null>('response', {
     defaultValue: null,
   });
 
+  const [anchorSession, setAnchorSession] = useState<Session>();
   const [balance, setBalance] = useState<number>(0);
   const [ethAddress, setEthAddress] = useState<string>("");
 
@@ -63,7 +64,6 @@ function App() {
     if (anchorSession) {
       
       const fetchBalance = async () => {
-      
         const contract = await contractKit.load("chexchexchex");
         const table = contract.table("accounts", anchorSession.actor.toString());
         
@@ -127,13 +127,27 @@ function App() {
       const contract = await contractKit.load("chexchexchex");
       const action = contract.action("transfer", {
         from: anchorSession.actor,
-        to: "james.x", // Change to eth.chintai
+        to: "eth.chintai",
         quantity: `${amount}.00000000 CHEX`,
         memo: ethAddress,
       })
-
-      const result = await session.transact({ action });
-      console.log(result);
+      try
+      {
+        const result = await anchorSession.transact({ action });
+        if (result && result.response)
+        {
+          setResponse(result.response.transaction_id);
+        }
+        else
+        {
+          console.error("Transaction failed to get a response.");
+        }
+      }
+      catch (error)
+      {
+        console.error(error);
+      }
+      
     }
   };
 
@@ -182,8 +196,14 @@ function App() {
           </label>
         </div>
         
+
+        {response? (
+          <div className="success-section">
+            <h3>Bridge transfer completed.</h3>
+            See transaction on a block explorer <a href={`https://bloks.io/transaction/${response}`}>here</a>.
+          </div>
+        ) : (
         <div className="conversion-section">
-        
           <h3>Step 3: Transfer</h3>
           <h5>This sends $CHEX to a contract on EOS (eth.chintai). This $CHEX will be burned and the same amount will be minted on Ethereum and sent to the address linked above.</h5>
           <label className="balance-label">
@@ -195,29 +215,32 @@ function App() {
             Your <span className="highlight">$CHEX</span> balance on EOS:
             <span id="chexBalance">{balance}</span>
           </label>
-        
-
           <div className="input-and-button-container">
             <div className="conversion-input-group">
-            <input 
-              type="text" 
-              className="conversion-input" 
-              min="10000" 
-              value={formatNumber(amount)} 
-              onChange={handleInputChange} 
-            />
+              <input 
+                type="text" 
+                className="conversion-input" 
+                min="10000" 
+                value={formatNumber(amount)} 
+                onChange={handleInputChange} 
+              />
               <label className="chex-label highlight">$CHEX</label>
             </div>
             <button className="submit-button" onClick={handleTransfer}>Transfer to bridge</button>
           </div>
+          <div>
+          Minimum transfer amount: 10,000 CHEX
+          </div>
         </div>
+        )}
 
         <div className="conversion-section"> 
           {/* It's actually a footer */}
           <a href="https://t.me/chex_token" target="_blank" rel="noopener noreferrer">
-            <FaTelegramPlane size={30} /> Community telegram
+            <FaTelegramPlane size={30} />
           </a>
         </div>
+
       </div>
     )
 }
