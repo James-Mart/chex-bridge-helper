@@ -16,7 +16,6 @@ declare global {
   }
 }
 
-let session : Session;
 const webRenderer = new WebRenderer();
 
 const eos = {
